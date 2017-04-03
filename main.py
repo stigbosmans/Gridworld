@@ -1,7 +1,7 @@
 import numpy as np
 import pygame
 from World import World, BasicWorld, RandomPlayerWorld, RandomWorld, WorldVisualizer
-(width, height) = (205, 205)
+(width, height) = (205, 270)
 
 def keyHandler(key):
     action=0
@@ -18,7 +18,7 @@ def keyHandler(key):
 pygame.init()
 screen = pygame.display.set_mode((width, height))
 
-wereld=RandomPlayerWorld()
+wereld=BasicWorld()
 wereld.showWorld()
 visualizer=WorldVisualizer(wereld,screen)
 
@@ -28,5 +28,6 @@ while running:
         if event.type == pygame.QUIT:
             running=False
         if event.type==pygame.KEYDOWN:
-            print(keyHandler(event.key))
+            action=keyHandler(event.key)
+            wereld.moveAgent(action)
             visualizer.update()
